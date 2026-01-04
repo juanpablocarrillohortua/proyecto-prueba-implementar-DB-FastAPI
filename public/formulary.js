@@ -13,7 +13,7 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // Enviamos los datos a la API (ajusta la URL si es necesario)
-        const response = await fetch('https://proyecto-prueba-implementar-db-fastapi.onrender.com/heroes', {
+        const response = await fetch('https://proyecyo-prueba-implementar-db-fastapi.onrender.com', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(heroData)
