@@ -24,12 +24,3 @@ async def create_db_and_tables():
     async with engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.create_all)
 
-if __name__ == "__main__":
-    import asyncio
-    import sys
-
-    # Solución específica para Windows
-    if sys.platform == 'win32':
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    
-    asyncio.run(create_db_and_tables())
