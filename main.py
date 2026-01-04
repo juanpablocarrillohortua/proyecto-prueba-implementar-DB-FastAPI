@@ -1,5 +1,5 @@
 from engine import engine, get_session
-from fastapi import FastAPI, Response, status, Depends
+from fastapi import FastAPI, Response, status, Depends, HTTPException
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -43,8 +43,11 @@ app.mount("/static", StaticFiles(directory="public"), name="static")
 
 @app.post("/heroes/", response_model=Hero, tags=['heroes'])
 async def create_hero(hero: Hero, session: AsyncSession = Depends(get_session)):
-    # SQLModel permite añadir el objeto directamente
-    session.add(hero)
-    await session.commit()
-    await session.refresh(hero)
-    return hero
+    try:
+        session.add(hero)
+        await session.commit()
+        await session.refresh(hero)
+        return hero
+    except Exception: # Aquí capturamos el error de duplicado
+        await session.rollback() # Cancelamos la operación
+        raise HTTPException(status_code=400, detail="El nombre del héroe ya existe")
