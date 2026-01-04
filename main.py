@@ -1,5 +1,6 @@
 from engine import engine, get_session
-from fastapi import FastAPI, Response, status, Depends, HTTPException, FileResponse
+from fastapi import FastAPI, Response, status, Depends, HTTPException
+from fastapi.responses import FileResponse
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
