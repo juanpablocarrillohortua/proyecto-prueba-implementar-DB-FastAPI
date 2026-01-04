@@ -1,5 +1,5 @@
 from engine import engine, get_session
-from fastapi import FastAPI, Response, status, Depends, HTTPException
+from fastapi import FastAPI, Response, status, Depends, HTTPException, FileResponse
 import json
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -40,6 +40,9 @@ app.add_middleware(
 
 app.mount("/static", StaticFiles(directory="public"), name="static")
 
+@app.get("/")
+async def read_index():
+    return FileResponse("public/index.html")
 
 @app.post("/heroes/", response_model=Hero, tags=['heroes'])
 async def create_hero(hero: Hero, session: AsyncSession = Depends(get_session)):
