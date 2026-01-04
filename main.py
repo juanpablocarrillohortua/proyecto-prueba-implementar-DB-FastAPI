@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from models_database import Hero
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from fastapi.middleware.cors import CORSMiddleware
 
 engine = engine
 
@@ -16,6 +17,11 @@ tags_metadata = [
     }
 ]
 
+origins = [
+    "https://proyecto-prueba-implementar-db-fastapi.onrender.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
 
 app = FastAPI(title='Heroes API',
               description="ApiRestFul para la gestión de vehiculos",
@@ -33,13 +39,14 @@ app = FastAPI(title='Heroes API',
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # En producción, pon aquí la URL de tu web
+    allow_origins=origins, # Autoriza tu URL de Render
     allow_credentials=True,
-    allow_methods=["*"], # Permite todos los métodos (POST, GET, etc.)
-    allow_headers=["*"], # Permite todos los encabezados
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.mount("/static", StaticFiles(directory="public"), name="static")
+
 
 @app.get("/")
 async def read_index():
