@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Héroes</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; }
+        form { display: flex; flex-direction: column; width: 300px; gap: 10px; }
+        input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #mensaje { margin-top: 20px; color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <form id="heroForm">
+        <h2>Nuevo Héroe</h2>
+        <input type="text" id="name" placeholder="Nombre (ej. Bruce)" required>
+        <input type="text" id="secret_name" placeholder="Nombre Secreto (ej. Batman)" required>
+        <input type="number" id="age" placeholder="Edad">
+        <button type="submit">Enviar a la Base de Datos</button>
+        <div id="mensaje"></div>
+    </form>
+
+    <script>
+        const form = document.getElementById('heroForm');
+        const mensaje = document.getElementById('mensaje');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evita que la página se recargue
+
+            // Recogemos los datos del formulario
+            const heroData = {
+                name: document.getElementById('name').value,
+                secret_name: document.getElementById('secret_name').value,
+                age: parseInt(document.getElementById('age').value) || null
+            };
+
+            try {
+                // Enviamos los datos a la API (ajusta la URL si es necesario)
+                const response = await fetch('http://127.0.0.1:8000/heroes/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(heroData)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    mensaje.innerText = `¡Éxito! Héroe guardado con ID: ${result.id}`;
+                    form.reset();
+                } else {
+                    mensaje.innerText = "Error al guardar el héroe.";
+                    mensaje.style.color = "red";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                mensaje.innerText = "No se pudo conectar con el servidor.";
+            }
+        });
+    </script>
+</body>
+</html>
