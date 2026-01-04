@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from models_database import Hero
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from fastapi.middleware.cors import CORSMiddleware
+from models_database import create_db_and_tables
 
 engine = engine
 
@@ -52,7 +53,7 @@ app.mount("/static", StaticFiles(directory="public"), name="static")
 async def read_index():
     return FileResponse("public/index.html")
 
-@app.post("/heroes/", response_model=Hero, tags=['heroes'])
+@app.post("/heroes", response_model=Hero, tags=['heroes'])
 async def create_hero(hero: Hero, session: AsyncSession = Depends(get_session)):
     try:
         session.add(hero)
@@ -62,3 +63,8 @@ async def create_hero(hero: Hero, session: AsyncSession = Depends(get_session)):
     except Exception: # Aquí capturamos el error de duplicado
         await session.rollback() # Cancelamos la operación
         raise HTTPException(status_code=400, detail="El nombre del héroe ya existe")
+    
+# 3. Evento de inicio para crear tablas
+@app.on_event("startup")
+async def on_startup():
+    await create_db_and_tables()
