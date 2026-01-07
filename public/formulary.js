@@ -4,7 +4,7 @@ const mensaje = document.getElementById('mensaje');
 form.addEventListener('submit', async (e) => {
     e.preventDefault(); // Evita que la página se recargue
 
-    // Recogemos los datos del formulario
+    // Recoger los datos del formulario
     const heroData = {
         name: document.getElementById('name').value,
         secret_name: document.getElementById('secret_name').value,
@@ -12,7 +12,7 @@ form.addEventListener('submit', async (e) => {
     };
 
     try {
-        // Enviamos los datos a la API (ajusta la URL si es necesario)
+        // Enviar los datos a la API 
         const response = await fetch('https://proyecyo-prueba-implementar-db-fastapi.onrender.com/heroes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -20,7 +20,7 @@ class Hero(SQLModel, table=True):
 
 # crear las tablas (busca clases que heredan SQLModel)
 async def create_db_and_tables():
-    # We must run the synchronous 'create_all' inside a 'run_sync' block
+    # Correr como asincrona una accion sincrona
     async with engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.create_all)
 

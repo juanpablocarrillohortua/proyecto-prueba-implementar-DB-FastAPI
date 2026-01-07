@@ -40,7 +40,7 @@ app = FastAPI(title='Heroes API',
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins, # Autoriza tu URL de Render
+    allow_origins=origins, # Autorizar URL de Render
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,11 +60,11 @@ async def create_hero(hero: Hero, session: AsyncSession = Depends(get_session)):
         await session.commit()
         await session.refresh(hero)
         return hero
-    except Exception: # Aquí capturamos el error de duplicado
-        await session.rollback() # Cancelamos la operación
+    except Exception: # Capturar error de duplicado
+        await session.rollback() # Cancelar la operación
         raise HTTPException(status_code=400, detail="El nombre del héroe ya existe")
     
-# 3. Evento de inicio para crear tablas
+# Evento de inicio para crear tablas
 @app.on_event("startup")
 async def on_startup():
     await create_db_and_tables()
