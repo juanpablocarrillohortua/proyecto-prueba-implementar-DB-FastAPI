@@ -28,3 +28,16 @@ proyecto-prueba-implementar-DB-FastAPI/
 └── requirements.txt       # Librerías y dependencias del proyecto
 ```
 ---
+## Tecnologías Utilizadas
+
+El proyecto se desarrolló utilizando un stack moderno enfocado en el rendimiento y la facilidad de despliegue:
+
+* **Lenguaje de programación:** [Python 3.14.2](https://www.python.org/)
+* **Framework Web (Backend):** [FastAPI](https://fastapi.tiangolo.com/) para la creación de la API REST.
+* **Manejo de Base de Datos (ORM):** [SQLModel](https://sqlmodel.tiangolo.com/) (basado en SQLAlchemy y Pydantic).
+* **Motor de Base de Datos:** [MySQL](https://www.mysql.com/)
+* **Infraestructura de Base de Datos (Cloud):** [Aiven](https://aiven.io/) (Hosting de base de datos administrada).
+* **Servidor ASGI:** [Uvicorn](https://www.uvicorn.org/) para la ejecución local y en producción.
+* **Despliegue (Hosting):** [Render](https://render.com/) para el alojamiento del servicio web y el frontend.
+
+---
