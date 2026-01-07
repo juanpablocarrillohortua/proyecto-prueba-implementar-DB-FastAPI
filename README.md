@@ -18,7 +18,7 @@ Realizar un proyecto simple que permita mostrar, de manera breve, la creación y
 
 ## Estructura del repositorio
 ```text
-titanic-pandas-proyecto/
+proyecto-prueba-implementar-DB-FastAPI/
 ├── README.md                 # Presentación del proyecto
 ├── .gitignore                # Archivos y carpetas a ignorar
 ├── engine.py                 # Gestiona conexión a la base de datos
