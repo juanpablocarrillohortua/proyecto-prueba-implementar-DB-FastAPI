@@ -19,12 +19,12 @@ Realizar un proyecto simple que permita mostrar, de manera breve, la creación y
 ## Estructura del repositorio
 ```text
 proyecto-prueba-implementar-DB-FastAPI/
-├── README.md                 # Presentación del proyecto
-├── .gitignore                # Archivos y carpetas a ignorar
-├── engine.py                 # Gestiona conexión a la base de datos
-├── main.py                   # Aloja la logica de la API y autorizaviones de URLs
-├── models_database.py        # Creación de la estructura de la base de datos
-├── public/                   # Aloja el frontend 
-└── requirements.txt          # Informe final y conclusiones
+├── README.md              # Presentación del proyecto
+├── .gitignore             # Archivos y carpetas a ignorar
+├── engine.py              # Gestiona la conexión a la base de datos
+├── main.py                # Aloja la lógica de la API y autorizaciones de URLs
+├── models_database.py     # Creación de la estructura de la base de datos
+├── public/                # Aloja el frontend
+└── requirements.txt       # Librerías y dependencias del proyecto
 ```
 ---
